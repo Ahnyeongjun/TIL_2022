@@ -25,7 +25,8 @@
 }
 
 .page_content{
-	width: 90%;
+	width: auto;
+	margin:auto;
 	height: 600px;
 	background-color: #EAEAEA;
 	float: left;
