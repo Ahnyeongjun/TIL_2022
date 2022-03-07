@@ -1,3 +1,4 @@
 Users
 .settings
 target
+src/main/resources/context.xml
