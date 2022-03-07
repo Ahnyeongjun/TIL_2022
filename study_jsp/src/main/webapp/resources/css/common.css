@@ -4,11 +4,11 @@
 	margin: 0;
 	padding: 0;
 }
-.wrap{
+.content, .wrap{
 	width: 100%;
 }
 
-.Header, .content, .Footer{
+.Header, .Footer{
 	width: 100%;
 	float: left;
 }
@@ -25,11 +25,10 @@
 }
 
 .page_content{
-	width: auto;
+	width: 500px;
 	margin:auto;
 	height: 600px;
 	background-color: #EAEAEA;
-	float: left;
 }
 
 .Header{
