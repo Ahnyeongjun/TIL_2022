@@ -1,19 +1,22 @@
-package com.a.a.entity;
+package com.a.a.dao;
 
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+
+import com.a.a.vo.UserVO;
+
 import org.apache.ibatis.session.SqlSession;
 
-public class UserService {
+public class UserDAO {
 	
 	private SqlSession sqlSession;
 	// setter
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	public User selectAllMemberList() throws DataAccessException {
-		User membersList = null;
+	public UserVO selectAllMemberList() throws DataAccessException {
+		UserVO membersList = null;
 		// 주입된 sqlSession 빈으로 selectList() 메소드를 호출
 		// Sql문에 id를 전달한다
 

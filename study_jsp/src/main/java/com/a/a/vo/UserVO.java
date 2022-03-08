@@ -1,6 +1,6 @@
-package com.a.a.entity;
+package com.a.a.vo;
 
-public class User {
+public class UserVO {
 	private String uid;
 	private String name;
 	private String password;

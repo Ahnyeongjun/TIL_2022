@@ -14,8 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.a.a.entity.User;
-import com.a.a.entity.UserService;
+import com.a.a.dao.UserDAO;
+import com.a.a.vo.UserVO;
 
 /**
  * Handles requests for the application home page.
@@ -24,7 +24,7 @@ import com.a.a.entity.UserService;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("./context.xml");
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -34,16 +34,16 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		UserService userService = (UserService) context.getBean("UserService");
+		UserDAO userService = (UserDAO) context.getBean("UserService");
 		
-		User user= userService.selectAllMemberList();
+		UserVO user= userService.selectAllMemberList();
 			logger.info("ssss"+ user.getName());
 				
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/test";
+		return "test";
 	}
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home2(Locale locale, Model model) {
