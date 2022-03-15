@@ -34,10 +34,10 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		UserDAO userService = (UserDAO) context.getBean("UserService");
+		UserDAO userService = (UserDAO) context.getBean("UserDAO");
 		
 		UserVO user= userService.selectAllMemberList();
-			logger.info("ssss"+ user.getName());
+			System.out.println("ssss"+ user.getName());
 				
 		String formattedDate = dateFormat.format(date);
 		

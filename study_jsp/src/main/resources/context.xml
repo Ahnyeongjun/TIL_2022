@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+ xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+ 
+ 	<!-- propertyPlaceholderConfigurer 클래스를 이용해서
+ 		데이터베이스 설정 관련 정보를 jdbc.properties 파일에서 읽어온다 -->
+
+	<!-- 마이바티스에서 제공하는 PooledDataSource 클래스를 이용해서
+		dataSource 빈을 생성한다 -->
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+		<property name="driver" value="com.mysql.jdbc.Driver"/> 
+		<property name="url" value="jdbc:mysql://url/blog"/> 
+		<property name="username" value="username"/>
+		<property name="password" value="password"/> 
+	</bean>
+	
+	
+	<!-- SqlSessionFactioryBean 클래스를 이용해서 dataSource 속성에 dataSource 빈을 설정 -->
+  	<!-- java 처럼 표현하자면
+		SqlSessionTemplate sqlSession
+			= new SqlSessionTemplate(sqlSessionFactory) -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      		<!-- ref : 사용할 다른 빈의 id가 들어간다 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- configLoation 속성에 modelConfig.xml을 설정한다 -->
+		<property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" />
+		<!-- mapperLocations 속성에 mybatis/mappers 패키지의 모든 매퍼 파일을 읽어와 설정 -->
+		<property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+	</bean>
+	
+	
+	<!-- SqlSessionTemplate 클래스를 이용해 sqlSession 빈을 생성한다 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="UserDAO" class="com.a.a.dao.UserDAO">
+		<!-- sqlSession 빈을 memberDAO 빈 속성에 주입 -->
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+</beans>
